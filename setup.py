@@ -39,8 +39,11 @@ setup(name="lightblue",
     description="Cross-platform Python Bluetooth library for Mac OS X, GNU/Linux and Python for Series 60.",
     long_description="LightBlue is a cross-platform Python Bluetooth library for Mac OS X, GNU/Linux and Python for Series 60. It provides support for device and service discovery (with and without end-user GUIs), a standard socket interface for RFCOMM sockets, sending and receiving of files over OBEX, advertising of RFCOMM and OBEX services, and access to local device information.",
     license="GPL",
-    packages=["lightblue"],
-    package_dir={"lightblue":getpackagedir()},
+    # packages=["lightblue"],
+    # package_dir={"lightblue":getpackagedir()},
+    packages=["lightblue","LightAquaBlue"],
+    package_dir={"lightblue":getpackagedir(), "LightAquaBlue":"%s/LightAquaBlue" % getpackagedir()},
+    package_data={"lightblue":[ ], "LightAquaBlue":["LightAquaBlue.bridgesupport"]},
     ext_modules=getextensions(),
     classifiers = [ "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -63,4 +66,5 @@ if MAC:
     if "install" in sys.argv:
         import os
         os.chdir("src/mac/LightAquaBlue")
-        os.system("xcodebuild install -arch '$(NATIVE_ARCH_ACTUAL)' -target LightAquaBlue -configuration Release DSTROOT=/ INSTALL_PATH=/Library/Frameworks DEPLOYMENT_LOCATION=YES")
+        # os.system("xcodebuild install -arch '$(NATIVE_ARCH_ACTUAL)' -target LightAquaBlue -configuration Release DSTROOT=/ INSTALL_PATH=/Library/Frameworks DEPLOYMENT_LOCATION=YES")
+        os.system("xcodebuild install -target LightAquaBlue -configuration Release DSTROOT=/ INSTALL_PATH=/Library/Frameworks DEPLOYMENT_LOCATION=YES")
